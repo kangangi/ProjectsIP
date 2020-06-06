@@ -31,6 +31,10 @@ class Project(models.Model):
     def display_all_projects(cls):
         return cls.objects.all()
 
+    @classmethod 
+    def search_project(cls,name):
+        return Project.objects.filter(title__icontains = name)
+
 class Profile(models.Model):
     '''
     Class that defines the profile objects

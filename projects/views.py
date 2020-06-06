@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
-from .models import Project
+from .models import Project,Profile
 from .forms import AddProjectForm, RateForm
 from django.urls import reverse
 from django.http import HttpResponseRedirect
@@ -54,20 +54,17 @@ def project_details(request,id):
         form = RateForm()
     return render(request, 'project_details.html', {"project":project, "form": form})
 
-# def rate_project(request,id):
-#     '''
-#     Rates project
-#     '''
-#     project = Project.objects.get(pk = id)
-#     if request.method == "POST":
-#         form = RateForm(request.POST)
-#         if form.is_valid():
-#             design = form.cleaned_data['design']
-#             usability = form.cleaned_data['usability']
-#             content = form.cleaned_data['content']
-
-#             print(design)
-#             print(usability)
-#             print(content)
-
-#             return HttpResponseRedirect(reverse('project_details',args =[int(project.id)]))
+def project_search(request):
+    '''
+    Display search results
+    '''
+    if "project" in request.GET and request.GET["project"]:
+        searched_project = request.GET.get("project")
+        projects = Project.search_project(searched_project)
+        message =f"{searched_project}"
+       
+        
+        return render(request, 'search.html', {"projects": projects,"message": message})
+    else:
+        message = "You haven't searched for any term"
+        return render(request,'search.html', {"message": message}) 

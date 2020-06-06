@@ -2,11 +2,6 @@ from django.test import TestCase
 from .models import Project
 from django.contrib.auth.models import User
 
-# title = models.CharField(max_length = 30)
-#     image = CloudinaryField('image')
-#     description = models.TextField()
-#     link = models.TextField()
-#     profile = models.ForeignKey(User, on_delete=models.CASCADE)
 class ProjectTestClass(TestCase):
     '''
     Class that tests the projects
@@ -58,6 +53,14 @@ class ProjectTestClass(TestCase):
         '''
         projects = Project.display_all_projects()
         self.assertTrue(len(projects) > 0 )
+
+    def test_search_project(self):
+        '''
+        This tests the search method 
+        '''
+        self.test.save_project()
+        project = Project.search_project(self.test.title)
+        self.assertEqual(len(project),1)
 
 
 
