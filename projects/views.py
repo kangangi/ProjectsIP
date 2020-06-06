@@ -76,6 +76,7 @@ def profile(request):
     title = 'Profile'
     current_user = request.user
     profile = Profile.objects.get(user =current_user)
+    projects = Project.get_user_projects(current_user)
 
-    return render(request, 'profile.html', {'profile':profile})
+    return render(request, 'profile.html', {'profile':profile,"projects": projects})
     

@@ -4,6 +4,7 @@
     {% if projects%}
    {% for project in projects%}
     <p>{{project.title}}</p>
+    <a href="{% url 'project_details' project.id %}">View details</a>
    {% endfor%}
    {% else%}
    <p>There is no project with that title</p>

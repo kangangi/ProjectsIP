@@ -62,8 +62,14 @@ class ProjectTestClass(TestCase):
         project = Project.search_project(self.test.title)
         self.assertEqual(len(project),1)
 
-
-
+    def test_get_user_projects_(self):
+        '''
+        This tests whether projects for profiles are retrieved
+        '''
+        self.test.save_project()
+        self.chombs.save()
+        profile_projects = Project.get_user_projects(self.chombs)
+        self.assertEqual(len(profile_projects),1 )
 
 
 
