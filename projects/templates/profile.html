@@ -2,6 +2,7 @@
 {% block content %}
 <div class="container">
     <p>{{profile.user}}</p>
+    <a href="{% url 'edit_profile' %}"> Edit Profile</a>
 
     {%if projects%}
     {% for project in projects %}

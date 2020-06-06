@@ -7,5 +7,6 @@ urlpatterns = [
     path('post/<int:id>', views.project_details, name = "project_details"),
     path('search/', views.project_search, name = "project_search"),
     path('profile/',views.profile, name = "profile"),
+    path('profile/edit/', views.edit_profile,name= 'edit_profile'),
 
 ]
