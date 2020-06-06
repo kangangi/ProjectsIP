@@ -1,13 +1,14 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from .models import Project
 
-@login_required()
 def index(request):
     '''
     Displays landing page 
     '''
     title = "IPDb"
+    projects = Project.display_all_projects()
 
-    return render(request,"index.html",{"title": title})
+    return render(request,"index.html",{"title": title, "projects": projects})
 
 
