@@ -4,6 +4,9 @@ from .models import Project,Profile
 from .forms import AddProjectForm, RateForm,EditProfileForm
 from django.urls import reverse
 from django.http import HttpResponseRedirect
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializer import ProjectSerializer,ProfileSerializer
 
 def index(request):
     '''
@@ -106,4 +109,14 @@ def edit_profile(request):
         form = EditProfileForm()
     return render(request, 'edit_profile.html', {"form": form})
 
-    
+class ProjectList(APIView):
+    def get(self,request,format = None):
+        projects =  Project.objects.all()
+        serializers = ProjectSerializer(projects, many=True)
+        return Response(serializers.data)  
+
+class ProfileList(APIView):
+    def get(self,request,format = None):
+        profiles =  Profile.objects.all()
+        serializers = ProfileSerializer(profiles, many=True)
+        return Response(serializers.data)  
