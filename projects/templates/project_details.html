@@ -1,0 +1,47 @@
+{% load bootstrap4 %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Upload Image</title>
+    {{form.media}}
+
+    {% block styles %}
+    {% bootstrap_css %}
+    {% endblock %}
+
+</head>
+
+<body>
+    {% include "navbar.html"%}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <form action="{%url 'project_details' project.id%}" method="post">
+                    {%csrf_token%}
+
+                    {% bootstrap_form form%}
+
+
+                    <input type="submit" class="btn btn-dark " value=" Rate Project">
+                </form>
+            </div>
+            <div class="col-md-6">
+                <p>{{project.title}}</p>
+                <p>Score: {{project.scores}}</p>
+            </div>
+
+        </div>
+
+
+        {% block scripts %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        {% bootstrap_javascript %}
+        {% endblock %}
+    </div>
+</body>
+
+</html>

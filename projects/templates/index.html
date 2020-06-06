@@ -9,6 +9,7 @@
     <p>by: {{project.profile}} on {{project.pubdate | timesince}} ago </p>
     <a href="{{project.link}}">{{project.link}}</a>
     <img src="{{project.image.url}}" alt="">
+    <a href="{% url 'project_details' project.id %}">View details</a>
     {% endfor %}
 </div>
 

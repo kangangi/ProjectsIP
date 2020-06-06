@@ -1,7 +1,9 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from .models import Project
-from .forms import AddProjectForm
+from .forms import AddProjectForm, RateForm
+from django.urls import reverse
+from django.http import HttpResponseRedirect
 
 def index(request):
     '''
@@ -30,3 +32,42 @@ def post_project(request):
 
     return render(request, 'post_project.html', {"form": form})
 
+def project_details(request,id):
+    '''
+    Show project details
+    '''
+    project = Project.objects.get(pk = id)
+    if request.method == "POST":
+        form = RateForm(request.POST)
+        if form.is_valid():
+            design = form.cleaned_data['design']
+            usability = form.cleaned_data['usability']
+            content = form.cleaned_data['content']
+
+            new_score = (design + usability + content)/3
+            project.scores = project.scores + new_score
+            project.save()
+
+            return HttpResponseRedirect(reverse('project_details',args =[int(project.id)]))
+
+    else:
+        form = RateForm()
+    return render(request, 'project_details.html', {"project":project, "form": form})
+
+# def rate_project(request,id):
+#     '''
+#     Rates project
+#     '''
+#     project = Project.objects.get(pk = id)
+#     if request.method == "POST":
+#         form = RateForm(request.POST)
+#         if form.is_valid():
+#             design = form.cleaned_data['design']
+#             usability = form.cleaned_data['usability']
+#             content = form.cleaned_data['content']
+
+#             print(design)
+#             print(usability)
+#             print(content)
+
+#             return HttpResponseRedirect(reverse('project_details',args =[int(project.id)]))

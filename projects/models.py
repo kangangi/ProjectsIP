@@ -15,6 +15,7 @@ class Project(models.Model):
     link = models.TextField()
     profile = models.ForeignKey(User, on_delete=models.CASCADE)
     pubdate = models.DateTimeField(auto_now_add=True, null = True)
+    scores = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title
