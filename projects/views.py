@@ -7,6 +7,7 @@ from django.http import HttpResponseRedirect
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializer import ProjectSerializer,ProfileSerializer
+from django.contrib.auth.models import User
 
 def index(request):
     '''
@@ -40,22 +41,11 @@ def project_details(request,id):
     Show project details
     '''
     project = Project.objects.get(pk = id)
-    if request.method == "POST":
-        form = RateForm(request.POST)
-        if form.is_valid():
-            design = form.cleaned_data['design']
-            usability = form.cleaned_data['usability']
-            content = form.cleaned_data['content']
-
-            new_score = (design + usability + content)/3
-            project.scores = project.scores + new_score
-            project.save()
-
-            return HttpResponseRedirect(reverse('project_details',args =[int(project.id)]))
-
-    else:
-        form = RateForm()
-    return render(request, 'project_details.html', {"project":project, "form": form})
+    voted = False
+    if project.voters.filter(id=request.user.id).exists():
+        voted = True 
+    
+    return render(request, 'project_details.html', {"project":project, "voted": voted})
 
 def project_search(request):
     '''
@@ -108,6 +98,43 @@ def edit_profile(request):
     else:
         form = EditProfileForm()
     return render(request, 'edit_profile.html', {"form": form})
+
+def add_voters(request,id):
+    '''
+    Adds voters
+    '''
+    project = Project.objects.get(pk=id)
+    voted = False
+    if project.voters.filter(id=request.user.id).exists():
+        voted = False
+    else:
+        project.voters.add(request.user)
+        voted = False
+    return HttpResponseRedirect(reverse('rate_project',args =[int(project.id)]))
+
+def rate_project(request,id):
+    '''
+    Rates the projects
+    '''
+    project = Project.objects.get(pk = id)
+    if request.method == "POST":
+        form = RateForm(request.POST)
+        if form.is_valid():
+            design = form.cleaned_data['design']
+            usability = form.cleaned_data['usability']
+            content = form.cleaned_data['content']
+
+            print('*'*80)
+            
+
+
+            return HttpResponseRedirect(reverse('project_details',args =[int(project.id)]))
+
+    else:
+        form = RateForm()
+    return render(request, 'rate_project.html', {"project":project, "form": form})
+
+
 
 class ProjectList(APIView):
     def get(self,request,format = None):

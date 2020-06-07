@@ -18,29 +18,24 @@
 <body>
     {% include "navbar.html"%}
     <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <form action="{%url 'project_details' project.id%}" method="post">
-                    {%csrf_token%}
+        <h1>{{project.title}}</h1>
+        {% if voted %}
+        <p>You have already voted </p>
+        {% else %}
+        <form action="{% url 'add_voters' project.id %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" name="project_id" value={{project.id}} class="btn btn-success btn-sm">
+                Vote</button>
+        </form>
+        {% endif %}
 
-                    {% bootstrap_form form%}
-
-
-                    <input type="submit" class="btn btn-dark " value=" Rate Project">
-                </form>
-            </div>
-            <div class="col-md-6">
-                <p>{{project.title}}</p>
-                <p>Score: {{project.scores}}</p>
-            </div>
-
-        </div>
+    </div>
 
 
-        {% block scripts %}
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        {% bootstrap_javascript %}
-        {% endblock %}
+    {% block scripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    {% bootstrap_javascript %}
+    {% endblock %}
     </div>
 </body>
 
