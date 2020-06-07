@@ -29,7 +29,7 @@
             </div>
             <div class="col-md-6">
                 <h1>{{project.title}}</h1>
-                <p class="text-muted" style="font-size: 12px;">by {{project.profile}} on {{project.pubdate | timesince}} ago </p>
+                <p class="text-muted" style="font-size: 12px;">posted by {{project.profile}} , {{project.pubdate | timesince}} ago </p>
                 <p>Description: {{project.description}}</p>
                 <p>Project Link: <a href="{{project.link}}">{{project.link}}</a></p>
 
@@ -37,6 +37,8 @@
                 <p>Design: {{project.average_design | floatformat:2}}</p>
                 <p>Usability: {{project.average_usability |floatformat:2}}</p>
                 <p>Content: {{project.average_content | floatformat:2}}</p>
+
+                <h3>Average Score : {{project.average_score| floatformat:2}}</h3>
             <hr style="color: white;">
 
             {% if user.is_authenticated %}

@@ -8,6 +8,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializer import ProjectSerializer,ProfileSerializer
 from django.contrib.auth.models import User
+import statistics
 
 def index(request):
     '''
@@ -131,6 +132,8 @@ def rate_project(request,id):
             project.average_design = project.design_score/project.voters_count()
             project.average_usability = project.usability_score/project.voters_count()
             project.average_content = project.content_score/project.voters_count()
+
+            project.average_score = (project.average_design + project.average_usability + project.average_content)/3
 
             project.save()
             return HttpResponseRedirect(reverse('project_details',args =[int(project.id)]))

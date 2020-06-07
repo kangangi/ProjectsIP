@@ -22,6 +22,7 @@ class Project(models.Model):
     average_design = models.FloatField(default=0,)
     average_usability = models.FloatField(default=0)
     average_content = models.FloatField(default=0)
+    average_score = models.FloatField(default=0)
 
 
     def __str__(self):
