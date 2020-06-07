@@ -124,10 +124,15 @@ def rate_project(request,id):
             usability = form.cleaned_data['usability']
             content = form.cleaned_data['content']
 
-            print('*'*80)
-            
+            project.design_score = project.design_score + design
+            project.usability_score = project.usability_score + usability
+            project.content_score = project.content_score + content
 
+            project.average_design = project.design_score/project.voters_count()
+            project.average_usability = project.usability_score/project.voters_count()
+            project.average_content = project.content_score/project.voters_count()
 
+            project.save()
             return HttpResponseRedirect(reverse('project_details',args =[int(project.id)]))
 
     else:

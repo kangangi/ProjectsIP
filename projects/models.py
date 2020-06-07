@@ -12,13 +12,17 @@ class Project(models.Model):
     title = models.CharField(max_length = 30)
     image = CloudinaryField('image')
     description = models.TextField()
-    link = models.TextField()
+    link = models.URLField()
     profile = models.ForeignKey(User, on_delete=models.CASCADE)
     pubdate = models.DateTimeField(auto_now_add=True, null = True)
     voters = models.ManyToManyField(User, related_name="votes")
     design_score = models.IntegerField(default=0)
     usability_score = models.IntegerField(default=0)
     content_score = models.IntegerField(default=0)
+    average_design = models.FloatField(default=0)
+    average_usability = models.FloatField(default=0)
+    average_content = models.FloatField(default=0)
+
 
     def __str__(self):
         return self.title
@@ -29,6 +33,10 @@ class Project(models.Model):
 
     def delete_project(self):
         self.delete()
+
+    def voters_count(self):
+        return self.voters.count()
+
 
     @classmethod
     def display_all_projects(cls):
@@ -50,7 +58,7 @@ class Profile(models.Model):
     bio = models.TextField()
     picture = CloudinaryField('image')
     email = models.EmailField()
-    github_link = models.TextField()
+    github_link = models.URLField()
 
     def __str__(self):
         return self.user.username 
