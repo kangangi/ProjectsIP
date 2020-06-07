@@ -7,8 +7,8 @@
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg sticky-top navbar-light " style="background-color:white">
-    <a class=" navbar-brand" style="color: black; ;" href="{% url 'index' %}">IPDb</a>
+  <nav class="navbar navbar-expand-lg sticky-top navbar-dark " style="background-color:black; color: white;">
+    <a class=" navbar-brand" style="font-family: 'Fredericka the Great', cursive;color:goldenrod; font-size: 40px; font-weight: bold; padding-left: 120px;" href="{% url 'index' %}">IPDb</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
       aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -19,10 +19,7 @@
         <form class="navbar-form" role="search" , action="{% url 'project_search' %}">
           <div class="input-group">
             <input type="text" class="form-control" placeholder="Search project" name="project">
-            <div class="input-group-btn">
-              <button class="btn btn-dark" type="submit"> Search</button>
-
-            </div>
+            
           </div>
         </form>
       </div>

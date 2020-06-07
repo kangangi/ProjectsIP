@@ -1,4 +1,5 @@
 {% load bootstrap4 %}
+{% load static%}
 <!DOCTYPE html>
 <html>
 
@@ -6,11 +7,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Upload Image</title>
+    <title>Post Project</title>
     {{form.media}}
 
     {% block styles %}
     {% bootstrap_css %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans&family=Fredericka+the+Great&display=swap" rel="stylesheet">
     {% endblock %}
 
 </head>
@@ -18,6 +21,8 @@
 <body>
     {% include "navbar.html"%}
     <div class="container">
+        <br>
+        <h1 class="text-center" style="color: goldenrod;">Add a project</h1>
         <form action="{%url 'post_project'%}" method="post" enctype="multipart/form-data">
             {%csrf_token%}
 

@@ -1,16 +1,31 @@
 {% extends 'base.html'%}
 {% block content %}
-<div class="container">
-    <h1>IPDb</h1>
-
+<div class="container-fluid" id="nits">
+    
+    <div class = "grid flex">
+        
     {% for project in projects %}
-    <h3>{{project.title}}</h3>
-    <p>{{project.description}}</p>
-    <p>by: {{project.profile}} on {{project.pubdate | timesince}} ago </p>
-    <a href="{{project.link}}">{{project.link}}</a>
-    <img src="{{project.image.url}}" alt="">
-    <a href="{% url 'project_details' project.id %}">View details</a>
+    
+    <div class = "card grid-item">
+    <img class="card-img-top" src="{{project.image.url}}" alt="">
+    <div class="card-body">
+        <h4 class="card-title">{{project.title}}</h4>
+        <div class="row">
+            <div class="col-md-4">
+                <p class="card-text">Design: {{project.average_design}}</p>
+            </div>
+            <div class="col-md-4">
+                <p class="card-text">Usability: {{project.average_usability}}</p>
+            </div>
+            <div class="col-md-4">
+                <p class="card-text">Content: {{project.average_content}}</p>
+            </div>
+        </div>
+        <br>
+        <a class="text-center" style="color: goldenrod;" href="{% url 'project_details' project.id %}"> View Details</a>
+    </div></div>
     {% endfor %}
+    </div>
 </div>
 
 {% endblock%}

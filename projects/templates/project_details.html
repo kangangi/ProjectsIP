@@ -1,4 +1,5 @@
 {% load bootstrap4 %}
+{% load static %}
 <!DOCTYPE html>
 <html>
 
@@ -6,11 +7,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Upload Image</title>
+    <title>Profile</title>
     {{form.media}}
 
     {% block styles %}
     {% bootstrap_css %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans&family=Fredericka+the+Great&display=swap" rel="stylesheet">
+
     {% endblock %}
 
 </head>
@@ -18,23 +22,38 @@
 <body>
     {% include "navbar.html"%}
     <div class="container">
-        <h1>{{project.title}}</h1>
-        {% if voted %}
-        <p>You have already voted </p>
-        {% else %}
-        <form action="{% url 'add_voters' project.id %}" method="POST">
-            {% csrf_token %}
-            <button type="submit" name="project_id" value={{project.id}} class="btn btn-success btn-sm">
-                Vote</button>
-        </form>
-        {% endif %}
+        <br>
+        <div class="row " id="project-details">
+            <div class="col-md-6">
+                <img src="{{project.image.url}}" alt="">
+            </div>
+            <div class="col-md-6">
+                <h1>{{project.title}}</h1>
+                <p class="text-muted" style="font-size: 12px;">by {{project.profile}} on {{project.pubdate | timesince}} ago </p>
+                <p>Description: {{project.description}}</p>
+                <p>Project Link: <a href="{{project.link}}">{{project.link}}</a></p>
 
-        <h2>Score</h2>
-        <h4>Design:{{project.average_design}}</h4>
-        <h4>Usability:{{project.average_usability}}</h4>
-        <h4>Content:{{project.average_content}}</h4>
+                <h3>Score</h3>
+                <p>Design: {{project.average_design}}</p>
+                <p>Usability: {{project.average_usability}}</p>
+                <p>Content: {{project.average_content}}</p>
+            <hr style="color: white;">
 
-
+            {% if user.is_authenticated %}
+            {% if voted %}
+            <p>You have already voted </p>
+            {% else %}
+            <form action="{% url 'add_voters' project.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" name="project_id" value={{project.id}} class="btn btn-light btn-lg ">
+                    Vote</button>
+            </form>
+            {% endif %}
+            {% else%}
+            <a href="/accounts/login/">Login in to vote</a>
+            {%endif%}
+        </div>
+        </div>
     </div>
 
 

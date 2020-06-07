@@ -1,4 +1,5 @@
 {% load bootstrap4 %}
+{% load static %}
 <!DOCTYPE html>
 <html>
 
@@ -11,6 +12,8 @@
     {% endif %}
     {% block styles %}
     {% bootstrap_css %}
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans&family=Fredericka+the+Great&display=swap" rel="stylesheet">
     {% endblock %}
 </head>
 
@@ -21,6 +24,8 @@
     {% block scripts %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     {% bootstrap_javascript %}
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script>
+    <script src="/static/js/masonry.js"></script>
     {% endblock %}
 </body>
 

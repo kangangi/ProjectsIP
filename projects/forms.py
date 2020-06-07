@@ -10,9 +10,9 @@ class AddProjectForm(ModelForm):
 
     
 class RateForm(forms.Form):
-    design = forms.IntegerField()
-    usability = forms.IntegerField()
-    content = forms.IntegerField()
+    design = forms.IntegerField(min_value= 1, max_value=10)
+    usability = forms.IntegerField(min_value= 1, max_value=10)
+    content = forms.IntegerField(min_value= 1, max_value=10)
 
 class EditProfileForm(ModelForm):
     class Meta:
