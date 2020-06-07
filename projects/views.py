@@ -16,8 +16,10 @@ def index(request):
     '''
     title = "IPDb"
     projects = Project.display_all_projects()
+    projects_scores = Project.objects.all().order_by('-average_score')
+    highest_score = projects_scores[0]
 
-    return render(request,"index.html",{"title": title, "projects": projects})
+    return render(request,"index.html",{"title": title, "projects": projects,"highest":highest_score})
 
 @login_required(login_url="/accounts/login/")
 def post_project(request):

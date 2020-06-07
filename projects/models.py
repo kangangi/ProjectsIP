@@ -39,6 +39,8 @@ class Project(models.Model):
         return self.voters.count()
 
 
+
+
     @classmethod
     def display_all_projects(cls):
         return cls.objects.all()

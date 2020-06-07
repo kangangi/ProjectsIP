@@ -36,3 +36,13 @@ body {
 #project-details p{
     font-size: 20px;
 }
+
+#highest{
+    background-color: white;
+    color: black;
+    padding:50px;
+    margin-right: 200px;
+    margin-left: 80px;
+    
+   
+}

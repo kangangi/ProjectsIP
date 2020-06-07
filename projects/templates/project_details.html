@@ -33,12 +33,12 @@
                 <p>Description: {{project.description}}</p>
                 <p>Project Link: <a href="{{project.link}}">{{project.link}}</a></p>
 
-                <h3>Score</h3>
+                <h3>Overall Score : {{project.average_score| floatformat:2}}</h3>
                 <p>Design: {{project.average_design | floatformat:2}}</p>
                 <p>Usability: {{project.average_usability |floatformat:2}}</p>
                 <p>Content: {{project.average_content | floatformat:2}}</p>
 
-                <h3>Average Score : {{project.average_score| floatformat:2}}</h3>
+                
             <hr style="color: white;">
 
             {% if user.is_authenticated %}
