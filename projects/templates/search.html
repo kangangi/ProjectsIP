@@ -2,12 +2,27 @@
 {% block content %}
 <div class="container">
     {% if projects%}
+    <h3 class="text-center" >{{projects | length}} project(s) found for {{message}}</h3>
    {% for project in projects%}
-    <p>{{project.title}}</p>
-    <a href="{% url 'project_details' project.id %}">View details</a>
+    <div class="card" style="width:500px; display:flex; margin: 0 auto; padding:10px;">
+        <img class="card-img-top" style="width: 480px; height:300px; object-fit: cover;" src="{{project.image.url}}" alt="">
+        <div class="card-body">
+            <h4 class="card-title">{{project.title}}</h4>
+
+            <p class="card-text">Design: {{project.average_design| floatformat:2 }}</p>
+
+            <p class="card-text">Usability: {{project.average_usability | floatformat:2}}</p>
+
+            <p class="card-text">Content: {{project.average_content | floatformat:2}}</p>
+
+            <br>
+            <a class="text-center" style="color: goldenrod;" href="{% url 'project_details' project.id %}"> View
+                Details</a>
+        </div>
+    </div>
    {% endfor%}
    {% else%}
-   <p>There is no project with that title</p>
+   <h3>There is no project with that title</h3>
    {% endif %}
 </div>
 
