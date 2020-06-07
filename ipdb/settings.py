@@ -86,6 +86,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -146,4 +147,7 @@ cloudinary.config(
   api_key = config('CLOUDINARY_API_KEY'), 
   api_secret = config('CLOUDINARY_API_SECRET'),
 )
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 

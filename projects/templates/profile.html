@@ -4,7 +4,11 @@
     <br>
     <div class="row">
         <div class="col-md-3">
+            {% if profile.picture%}
             <img style="width:200px; height:200px;object-fit: cover;border-radius: 50%;" src="{{profile.picture.url}}" alt="">
+            {% else %}
+            <img style="width:200px; height:200px;object-fit: cover;border-radius: 50%;" src="/media/images/avartar.png" alt="">
+            {% endif%}
         </div>
         <div class="col-md-9">
             <h1>{{profile.user}}</h1>
