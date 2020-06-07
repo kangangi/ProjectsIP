@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Profile</title>
+    <title>Project Details</title>
     {{form.media}}
 
     {% block styles %}
@@ -34,9 +34,9 @@
                 <p>Project Link: <a href="{{project.link}}">{{project.link}}</a></p>
 
                 <h3>Score</h3>
-                <p>Design: {{project.average_design}}</p>
-                <p>Usability: {{project.average_usability}}</p>
-                <p>Content: {{project.average_content}}</p>
+                <p>Design: {{project.average_design | floatformat:2}}</p>
+                <p>Usability: {{project.average_usability |floatformat:2}}</p>
+                <p>Content: {{project.average_content | floatformat:2}}</p>
             <hr style="color: white;">
 
             {% if user.is_authenticated %}

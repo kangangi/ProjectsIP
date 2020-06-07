@@ -19,7 +19,7 @@ class Project(models.Model):
     design_score = models.IntegerField(default=0)
     usability_score = models.IntegerField(default=0)
     content_score = models.IntegerField(default=0)
-    average_design = models.FloatField(default=0)
+    average_design = models.FloatField(default=0,)
     average_usability = models.FloatField(default=0)
     average_content = models.FloatField(default=0)
 

@@ -11,10 +11,23 @@
             {% endif%}
         </div>
         <div class="col-md-9">
-            <h1>{{profile.user}}</h1>
+            <h1 style="color: goldenrod;">{{profile.user}}</h1>
+            {% if profile.bio%}
             <p>About : {{profile.bio}}</p>
+            {%else%}
+            <p>About : I am an IPDb user</p>
+            {%endif%}
+            {% if profile.email%}
             <p>Email: {{profile.email}}</p>
-            <p>Github: <a href="{{profile.github_link}}">{{profile.github_link}}</a></p>
+            {%else%}
+            <p>Email : Edit profile to add email</p>
+            {%endif%}
+            {% if profile.github_link%}
+            <p>Github : <a href="{{profile.github_link}}">{{profile.github_link}}</a></p>
+            {%else%}
+            <p>Github  : Edit profile to add github account</p>
+            {%endif%}
+            
             <a style="color: goldenrod;" href="{% url 'edit_profile' %}"> Edit Profile</a>
         </div>
     </div>
@@ -32,13 +45,13 @@
             <h4 class="card-title">{{project.title}}</h4>
             <div class="row">
                 <div class="col-md-4">
-                    <p class="card-text">Design: {{project.average_design}}</p>
+                    <p class="card-text">Design: {{project.average_design | floatformat:2}}</p>
                 </div>
                 <div class="col-md-4">
-                    <p class="card-text">Usability: {{project.average_usability}}</p>
+                    <p class="card-text">Usability: {{project.average_usability | floatformat:2}}</p>
                 </div>
                 <div class="col-md-4">
-                    <p class="card-text">Content: {{project.average_content}}</p>
+                    <p class="card-text">Content: {{project.average_content | floatformat:2}}</p>
                 </div>
             </div>
             <br>

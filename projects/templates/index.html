@@ -12,13 +12,13 @@
         <h4 class="card-title">{{project.title}}</h4>
         <div class="row">
             <div class="col-md-4">
-                <p class="card-text">Design: {{project.average_design}}</p>
+                <p class="card-text">Design: {{project.average_design| floatformat:2 }}</p>
             </div>
             <div class="col-md-4">
-                <p class="card-text">Usability: {{project.average_usability}}</p>
+                <p class="card-text">Usability: {{project.average_usability | floatformat:2}}</p>
             </div>
             <div class="col-md-4">
-                <p class="card-text">Content: {{project.average_content}}</p>
+                <p class="card-text">Content: {{project.average_content | floatformat:2}}</p>
             </div>
         </div>
         <br>
