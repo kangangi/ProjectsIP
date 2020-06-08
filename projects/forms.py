@@ -5,7 +5,7 @@ from django import forms
 class AddProjectForm(ModelForm):
     class Meta:
         model = Project
-        exclude = ['profile', 'pubdate', 'voters', 'design_score','usability_score','content_score','average_design','average_usability','average_content']
+        exclude = ['profile', 'pubdate', 'voters', 'design_score','usability_score','content_score','average_design','average_usability','average_content','average_score']
 
 
     
